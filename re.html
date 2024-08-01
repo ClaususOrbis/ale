@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ale by Clausus Orbis</title>
+	<link rel="icon" class="js-site-favicon" type="image/png" href="https://avatars.githubusercontent.com/u/154006113?s=32&v=4">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/nodeca/pako@master/dist/pako_inflate.min.js"></script>
+</head>
+<body>
+    <script>
+        function unPako(string) {
+            let temp = pako.inflate(JSON.parse("["+string+"]"));
+            return new TextDecoder().decode(temp);
+        }
+        function redir() {
+            if (window.location.search === "") {return;}
+
+            let str = window.location.search.replace(/^./,'');
+
+            window.location.assign(unPako(str));
+        }
+        document.onreadystatechange = function() {
+            if (document.readyState === 'complete') {
+                redir();
+            }
+        };
+    </script>
+</body>
+</html>
