@@ -9,16 +9,17 @@
 </head>
 <body>
     <script>
-        function unPako(string) {
-            let temp = pako.inflate(JSON.parse("["+string+"]"));
-            return new TextDecoder().decode(temp);
+        function decodeDisshit(string) {
+            return decodeURIComponent(atob(string).split('').map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
         }
         function redir() {
             if (window.location.search === "") {return;}
 
             let str = window.location.search.replace(/^./,'');
 
-            window.location.assign(unPako(str));
+            window.location.assign(decodeDisshit(str));
         }
         document.onreadystatechange = function() {
             if (document.readyState === 'complete') {
