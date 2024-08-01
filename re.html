@@ -10,7 +10,7 @@
     <script>
         if (window.location.search !== "") {
             let q = window.location.search.replace(/^\?/,'');
-            window.location.assign(q);
+            window.location.assign(decodeURIComponent(q));
         }
     </script>
 </body>
