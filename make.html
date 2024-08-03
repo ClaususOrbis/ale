@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ale by Clausus Orbis</title>
+	<link rel="icon" class="js-site-favicon" type="image/png" href="https://avatars.githubusercontent.com/u/154006113?s=32&v=4">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            margin: 16px;
+        }
+        #input, #output {
+            outline: 0;
+            border: 0;
+            background: #ddd;
+            font-size: 18px;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        #input {
+            height: 64px;
+        }
+        #output {
+            height: calc(100svh - 64px - 32px - 16px);
+        }
+    </style>
+</head>
+<body>
+    <input id="input">
+    <textarea id="output"></textarea>
+    <script>
+        (function() {
+            document.querySelector('#input').value = "";
+            document.querySelector('#output').value = "";
+        })();
+        function convert(string) {
+            return encodeURIComponent(string).replace(/\%E0\%A7\%B3/g,'%5C');
+        }
+        function encodeDisshit(str) {
+            return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+            function toSolidBytes(match, p1) {
+                return String.fromCharCode('0x' + p1);
+            }));
+        }
+        document.querySelector('#input').addEventListener('input', function() {
+            document.querySelector('#output').value = 'https://claususorbis.github.io/ale/re.html?' + encodeDisshit('obtainium://app/' + convert(document.querySelector('#input').value));
+        });
+    </script>
+</body>
+</html>
