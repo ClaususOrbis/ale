@@ -6,8 +6,47 @@
     <title>Ale by Clausus Orbis</title>
 	<link rel="icon" class="js-site-favicon" type="image/png" href="https://avatars.githubusercontent.com/u/154006113?s=32&v=4">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/nodeca/pako@master/dist/pako_inflate.min.js"></script>
+    <style>
+        html, body, content {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: #181818;
+            color: #ededed;
+        }
+        content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: calc((10svw + 10svh) / 2);
+        }
+        .first, .second {
+            height: 1px;
+            width: 100%;
+            flex: 1 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: calc((10svw + 10svh) / 2);
+            cursor: pointer;
+            transition: font-size .2s linear;
+        }
+        .first:hover, .second:hover {
+            text-shadow: 0 0 30px #000000, 0 0 50px #000000;
+        }
+        .first:active, .second:active {
+            font-size: calc(((10svw + 10svh) / 2) - .5rem);
+        }
+    </style>
 </head>
 <body>
+    <content>
+        <div onclick="reloadPage()" class="first">try again</div>
+        <div onclick="goHome()" class="second">go back</div>
+    </content>
     <script>
         function decodeDisshit(string) {
             return decodeURIComponent(atob(string).split('').map(function (c) {
@@ -26,6 +65,16 @@
                 redir();
             }
         };
+        function reloadPage() {
+            setTimeout(function() {
+                window.location.reload(true);
+            }, 200);
+        }
+        function goHome() {
+            setTimeout(function() {
+                window.location.assign('https://github.com/ClaususOrbis/ale');
+            }, 200);
+        }
     </script>
 </body>
 </html>
